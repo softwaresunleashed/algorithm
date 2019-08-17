@@ -1,7 +1,18 @@
 /******************************************************************************
-    QuickFind.c
-*******************************************************************************/
+    QuickUnion.c
 
+	Find: Check if p and q have the same root.
+	
+	Union: To merge components containing p and q, set the id of p's root 
+	to the id of q's root.
+	
+	==============================================
+	algorithm 		initialize 		union	find
+	==============================================
+	quick-union 		N 			N 		N (worst case)
+	==============================================
+	
+*******************************************************************************/
 
 #include <stdio.h>
 
@@ -15,7 +26,7 @@ typedef int bool;
 #define MAX_NODES   8
 int id[MAX_NODES];
 
-void initQuickFind(int n)
+void initQuickUnion(int n)
 {   
     int i = 0;
     for(i = 0; i < n; i++)
@@ -24,20 +35,23 @@ void initQuickFind(int n)
     }
 }
 
+int root(int i)
+{
+	while(i != id[i])
+		i = id[i];
+	return i;	
+}
+
 bool connected(int p, int q)
 { 
-    return id[p] == id[q]; 
+    return root(p) == root(q);
 }
 
 void union_join(int p, int q)
 {
-    int pid = id[p];
-    int qid = id[q];
-    int i = 0;
-    
-    for ( i = 0; i < MAX_NODES; i++)
-        if (id[i] == pid) 
-            id[i] = qid;
+    int i = root(p);
+    int j = root(q);
+	id[i] = j;
 }
 
 void display()
@@ -54,7 +68,7 @@ void display()
 int main()
 {
  
-    initQuickFind(MAX_NODES);
+    initQuickUnion(MAX_NODES);
     
     union_join(0, 5);
     union_join(5, 6);
@@ -67,3 +81,4 @@ int main()
     
     return 0;
 }
+
