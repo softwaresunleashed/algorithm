@@ -63,10 +63,28 @@ void display()
     printf("\n ");
 }
 
+/*
+method find() to the union-find data type so that find(i) returns the largest
+ element in the connected component containing i.
+*/
+int find(int p)
+{
+	int ret_largest = -1;
+	int i = p;
 
+	while(i != id[i])
+	{
+		i = id[i];
+		if(ret_largest < id[i])
+			ret_largest = id[i];
+	}
+	
+	return ret_largest;
+}
 
 int main()
 {
+	int largest_number_in_con_components = -1;
  
     initQuickUnion(MAX_NODES);
     
@@ -79,6 +97,9 @@ int main()
     
     printf((connected(0,7) == TRUE) ? "\nConnected" : "\nNot Connected");
     
+	largest_number_in_con_components = find(7);
+	printf("Largest Number among connected components = %d", largest_number_in_con_components);
+	
     return 0;
 }
 
