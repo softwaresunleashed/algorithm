@@ -78,6 +78,13 @@ void exch(int array[], int index1, int index2)
 {
 	int temp = 0;
 	
+	/* Optimization : 
+		If both elements are same, then dont swap, 
+		This avoids unnecessary swaps. 
+	*/
+	if(array[index1] == array[index2])
+		return;
+	
 	temp = array[index1];
 	array[index1] = array[index2];
 	array[index2] = temp;
