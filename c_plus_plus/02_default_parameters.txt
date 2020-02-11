@@ -1,0 +1,91 @@
+https://www.geeksforgeeks.org/output-of-c-program-set-12-2/
+
+Default Parameters in C++
+=====================
+
+
+Points about Default Parameters:
+--------------------------------------------
+* Default arguments do not participate in signature of functions.
+* So signatures of fun() in base class and derived class are considered same, hence the fun() of base class is overridden.
+* Also, the default value is used at compile time. When compiler sees that an argument is missing in a function call, it substitutes the default value given.
+* In the above program, value of x is substituted at compile time, and at run time derived class’s fun() is called.
+
+
+#include <iostream> 
+using namespace std; 
+  
+class Base 
+{ 
+public: 
+    virtual void fun ( int x = 0 ) 
+    { 
+        cout << "Base::fun(), x = " << x << endl; 
+    } 
+}; 
+  
+class Derived : public Base 
+{ 
+public: 
+    virtual void fun ( int x ) 
+    { 
+        cout << "Derived::fun(), x = " << x << endl; 
+    } 
+}; 
+  
+  
+int main() 
+{ 
+    Derived d1; 
+    Base *bp = &d1; 
+    bp->fun(); 
+    return 0; 
+}
+Output of following program is : 
+---------------------------------------
+Derived::fun(), x = 0
+
+
+
+
+Program variation 2 :
+--------------------------
+#include <iostream> 
+using namespace std; 
+  
+class Base 
+{ 
+public: 
+    virtual void fun ( int x = 0) 
+    { 
+        cout << "Base::fun(), x = " << x << endl; 
+    } 
+}; 
+  
+class Derived : public Base 
+{ 
+public: 
+    virtual void fun ( int x = 10 ) // NOTE THIS CHANGE 
+    { 
+        cout << "Derived::fun(), x = " << x << endl; 
+    } 
+}; 
+
+int main() 
+{ 
+    Derived d1; 
+    Base *bp = &d1; 
+    bp->fun(); 
+    return 0; 
+} 
+
+Output (Program 2)
+--------------------------
+* Output of this program is same as the previous program. 
+* The reason is same, the default value is substituted at compile time (as per the default value of Object Type). 
+* The fun() is called on bp which is a pointer of Base type. So compiler substitutes 0 (not 10).
+* In general, it is a best practice to avoid default values in virtual functions to avoid confusion.
+
+NOTE : 
+--------
+Default value would be taken of the function defined in the class (of which object is created).
