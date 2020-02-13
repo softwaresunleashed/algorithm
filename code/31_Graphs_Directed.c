@@ -1,0 +1,585 @@
+/******************************************************************************
+    31_Graphs_Directed_BFS.c
+	========================
+
+	
+*******************************************************************************/
+
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef int bool;
+#define TRUE 1
+#define FALSE 0
+
+#define DEBUG_ENABLE    0	/* Enable to print debug messages */
+
+
+typedef struct linked_list
+{
+	int vertex_num;
+	struct linked_list *next;
+} linked_list_t;
+
+typedef struct vertex_bag
+{
+	int bag_size;
+	linked_list_t *bag_head;
+} vertex_bag_t;
+
+typedef struct graph
+{
+	vertex_bag_t *v;	// Array of vertices
+	int v_size;	
+} graph_t;
+
+graph_t * init_graph(int num_of_vertices)
+{
+	graph_t * graph = (graph_t *)malloc(sizeof(graph_t));
+	int i = 0;
+	
+	if(graph)
+	{
+	    graph->v_size = num_of_vertices;
+		graph->v = (vertex_bag_t *)malloc(num_of_vertices * sizeof(vertex_bag_t));
+		if(graph->v)
+		{
+		
+			for(i = 0; i < num_of_vertices; i++)
+			{
+			    graph->v[i].bag_size = 0;
+			    graph->v[i].bag_head = NULL;
+			}
+			return graph;
+		}
+	}
+	return NULL;	
+}
+
+linked_list_t * create_new_node(int w)
+{
+    linked_list_t * temp_node = malloc(sizeof(linked_list_t));
+    if(temp_node)
+    {
+        temp_node->vertex_num = w;
+        temp_node->next = NULL;
+    }
+
+    return temp_node;
+}
+
+void add_to_bag(vertex_bag_t * bag, int w)
+{
+	if(bag->bag_head == NULL)
+	{
+		bag->bag_head = create_new_node(w);
+		bag->bag_size = 1;
+	}
+	else
+	{
+		// Loop till end of bag
+		linked_list_t * temp_node = bag->bag_head;
+		while(temp_node->next != NULL)
+			temp_node = temp_node->next;
+		
+		temp_node->next = create_new_node(w);
+		
+		// Increase the size of bag by one
+		bag->bag_size++;
+	}
+}
+
+void addEdge(graph_t * graph_instance, int v, int w)
+{
+
+	if(graph_instance)
+	{
+		/* This is the only difference in graph algo, in directed graph 
+			each edge pair v->w has to be defined. 
+			
+		Unlike Undirected graphs which assumes both edges v->w & w->v 
+		*/
+		//Add edge w to vertice v :- adj[v].add(w);
+		add_to_bag(&graph_instance->v[v], w);
+	}
+}
+
+linked_list_t * adjacent(graph_t * graph_instance, int v)
+{ 
+	return graph_instance->v[v].bag_head;
+}
+
+/* Print Adjacent Vertices */
+void print_adjacent(graph_t * graph_instance, int v)
+{ 
+	/* Get Iterator of adjacent vertices to vertice-v*/
+    linked_list_t * temp = adjacent(graph_instance, v);
+    printf("\nAdjacent Vertices connnected to vertex %d : ", v);
+    while(temp != NULL)
+    {
+        printf("%d-%d ", v, temp->vertex_num);
+        temp =  temp->next;
+    }
+}
+
+/* Returns degree of a specific vertex */
+int degree(graph_t * graph_instance, int v)
+{
+    vertex_bag_t * vertex_bag = &graph_instance->v[v];
+	if(vertex_bag)
+		return graph_instance->v[v].bag_size;
+	else 
+		return 0;
+}
+
+/* Returns the maximum degree of the graph */
+int max_degree(graph_t * graph_instance)
+{
+	int max_degree = 0;
+	int bag_size = 0;
+	int total_graph_vertices = 0;
+	
+	if(graph_instance)
+	{
+		total_graph_vertices = graph_instance->v_size;
+		for(int i = 0; i < total_graph_vertices; i++)
+		{
+			bag_size = degree(graph_instance, i);
+			if(bag_size > max_degree)
+				max_degree = bag_size;
+		}
+	}
+	return max_degree;	
+}
+
+int number_of_self_loops(graph_t * graph_instance)
+{
+	int self_loops_count = 0;
+	linked_list_t * adjacent_nodes = NULL;
+	
+	if(graph_instance)
+	{
+
+		for(int i = 0; i < graph_instance->v_size; i++)
+		{
+			adjacent_nodes = adjacent(graph_instance, i);
+			if(adjacent_nodes)
+			{
+				while(adjacent_nodes->next != NULL)
+				{
+					if(adjacent_nodes->vertex_num == i)
+						self_loops_count++;
+
+					adjacent_nodes = adjacent_nodes->next;
+				}
+			}
+		}
+	}
+			
+	return self_loops_count/2; // each edge counted twice
+}
+
+/* --------------------------------------- DFS Data Structure */
+typedef struct dfs_ds
+{
+	bool * marked;
+	int  * edge_to;
+	int num_of_vertices;
+}dfs_ds_t;
+
+/* Depth First Search DS Instance */
+dfs_ds_t * dfs_ds = NULL;
+
+/* Perform Depth First Search on a Graph from src vertex */
+void dfs(graph_t * graph_instance, int src_vertex)
+{
+	int num_of_ver = 0;
+	linked_list_t * adjacent_vertex_iterator = NULL;
+	
+	/* Initialize DFS data structure */
+	if(dfs_ds == NULL)
+	{
+		int i = 0;
+		dfs_ds = (dfs_ds_t *)malloc(sizeof(dfs_ds_t));
+
+		num_of_ver = dfs_ds->num_of_vertices = graph_instance->v_size;
+		dfs_ds->marked = (bool *)malloc(num_of_ver * sizeof(bool));
+		dfs_ds->edge_to = (int *)malloc(num_of_ver * sizeof(int));
+		for(i = 0; i < num_of_ver; i++)
+		{
+			dfs_ds->marked[i] = FALSE;
+			dfs_ds->edge_to[i] = -1;
+		}
+	}
+	
+	/* Mark visited vertex as TRUE in DFS data structure */
+	dfs_ds->marked[src_vertex] = TRUE;
+#if DEBUG_ENABLE
+	printf("\n >>>> Marked [src_vertex : %d]", src_vertex);
+#endif
+
+	/* Get Iterator of adjacent vertices to vertice-"src_vertex" */
+    adjacent_vertex_iterator = adjacent(graph_instance, src_vertex);
+#if DEBUG_ENABLE
+	print_adjacent(graph_instance, src_vertex);
+#endif
+
+	/* Iterate through adjacent vertexes of src_vertex */
+	while(adjacent_vertex_iterator != NULL)
+	{
+		int w = adjacent_vertex_iterator->vertex_num;
+		
+		/* if this node is not visited, 
+		call DFS recursively for this adjacent node, 
+		till we reach a marked node */
+		if(!dfs_ds->marked[w])
+		{
+			dfs(graph_instance, w);
+			dfs_ds->edge_to[w] = src_vertex;
+#if DEBUG_ENABLE			
+			printf("\n >>>>>> edge_to [w : %d] = [src_vertex : %d]", w, src_vertex);
+#endif
+		}
+		adjacent_vertex_iterator = adjacent_vertex_iterator->next;
+	}
+}
+
+
+/* Is there a path to dst_vertex ? 
+If "marked" is TRUE, that means that vertex can be reached. 
+This API should be called immediately after DFS routine */
+bool has_path(int dst_vertex)
+{
+	bool marked = FALSE;
+	
+	if(dfs_ds)
+	{
+		return dfs_ds->marked[dst_vertex];
+	}
+	
+	return marked;	
+}
+
+/* path from src_vertex to dst_vertex, NULL if no such path */
+linked_list_t * path_to(int src_vertex, int dst_vertex)
+{
+	linked_list_t *head = NULL, *temp = NULL;
+	/* If destination vertex is 
+	not visited (ie. FALSE), that means there is not valid 
+	path to destination vertex */
+	if(has_path(dst_vertex) == FALSE)
+	{
+		return NULL;
+	}
+	
+	/* Start creating a linked list to store path */
+	head = create_new_node(dst_vertex);
+	
+	/* Keep adding the vertexes in path to iterator */
+	while(dfs_ds->edge_to[dst_vertex] != src_vertex)
+	{
+		temp = create_new_node(dfs_ds->edge_to[dst_vertex]);
+		temp->next = head;
+		head = temp;
+		
+		/* Get the parent vertex to current vertex */
+		dst_vertex = dfs_ds->edge_to[dst_vertex];
+	}
+	
+	/* Add the source vertex */
+	temp = create_new_node(src_vertex);
+	temp->next = head;
+	head = temp;
+	
+	return head;
+}
+
+
+
+/* --------------------------------------- BFS Data Structure */
+typedef struct bfs_ds
+{
+	bool * marked;
+	int  * edge_to;
+	int num_of_vertices;
+}bfs_ds_t;
+
+/* Depth First Search DS Instance */
+bfs_ds_t * bfs_ds = NULL;
+linked_list_t *bfs_queue_head = NULL;
+
+/* BFS queue function */
+void bfs_queue(linked_list_t **param_bfs_queue_head, linked_list_t *adj_list_head)
+{
+	linked_list_t *temp_node = *param_bfs_queue_head;
+	linked_list_t *new_node = NULL; 
+	
+	
+	if(temp_node)
+	{
+    	/* If head is not null , Iterate till last node of the queue */
+    	while(temp_node->next != NULL)
+    		temp_node = temp_node->next;    
+	}
+	
+	/* Iterate thru adj vertex list and add it to bfs_queue */
+	while(adj_list_head != NULL)
+	{
+	    new_node = create_new_node(adj_list_head->vertex_num);
+	    
+	    if(temp_node == NULL)
+	    {
+	        /* If BFS queue is empty, then make this new node as first node in queue */
+	        *param_bfs_queue_head = new_node;
+	    }
+	    else
+	    {
+	        temp_node->next = new_node;
+	    }
+
+        temp_node = new_node;
+		adj_list_head = adj_list_head->next;
+	}
+}
+
+/* BFS dequeue function */
+linked_list_t * bfs_dequeue(linked_list_t **bfs_queue_head)
+{
+	linked_list_t *temp_node = *bfs_queue_head;
+	
+	if(temp_node == NULL)
+	{
+		return NULL;
+	}
+	else
+	{
+		*bfs_queue_head = ((linked_list_t *)bfs_queue_head)->next;
+	}
+	
+	return temp_node;
+}
+
+/* Perform Breath First Search on a Graph from src vertex */
+void bfs(graph_t * graph_instance, int src_vertex)
+{
+	linked_list_t *adj_list_head = NULL;
+	linked_list_t *current_node = NULL;
+	int current_vertex = 0;
+	
+	/* Initialize BFS data structure */
+	if(bfs_ds == NULL)
+	{
+		int i = 0;
+		int num_of_ver = 0;
+		bfs_ds = (bfs_ds_t *)malloc(sizeof(bfs_ds_t));
+
+		num_of_ver = bfs_ds->num_of_vertices = graph_instance->v_size;
+		bfs_ds->marked = (bool *)malloc(num_of_ver * sizeof(bool));
+		bfs_ds->edge_to = (int *)malloc(num_of_ver * sizeof(int));
+		for(i = 0; i < num_of_ver; i++)
+		{
+			bfs_ds->marked[i] = FALSE;
+			bfs_ds->edge_to[i] = -1;
+		}
+	}
+	
+	if(bfs_queue_head == NULL)
+	{
+		bfs_queue_head = create_new_node(src_vertex);
+		bfs_queue(&bfs_queue_head, NULL);	
+	}
+	
+	while(bfs_queue_head != NULL)
+	{
+		/* Take out first node from the queue */
+		current_node = bfs_dequeue(&bfs_queue_head);
+		current_vertex = current_node->vertex_num;
+		
+		if(!bfs_ds->marked[current_vertex])
+		{
+    		/* Mark vertex as visited if not already marked */
+    		bfs_ds->marked[current_vertex] = TRUE;
+    		bfs_ds->edge_to[current_vertex] = src_vertex;
+    		
+    		/* Add adjacent list to BFS queue */
+    		adj_list_head = adjacent(graph_instance, current_vertex);
+    		bfs_queue(&bfs_queue_head, adj_list_head);
+		}
+		
+		/* Free memory allocated to head node of BFS queue */
+		if(current_node)
+		{
+			free(current_node);
+			current_node = NULL;
+		}
+	}
+}
+
+/* Is there a path to dst_vertex ? 
+If "marked" is TRUE, that means that vertex can be reached. 
+This API should be called immediately after BFS routine */
+bool bfs_has_path(int dst_vertex)
+{
+	bool marked = FALSE;
+	
+	if(bfs_ds)
+	{
+		return bfs_ds->marked[dst_vertex];
+	}
+	
+	return marked;	
+}
+
+/* path from src_vertex to dst_vertex, NULL if no such path */
+linked_list_t * bfs_path_to(int src_vertex, int dst_vertex)
+{
+	linked_list_t *head = NULL, *temp = NULL;
+	/* If destination vertex is 
+	not visited (ie. FALSE), that means there is not valid 
+	path to destination vertex */
+	if(bfs_has_path(dst_vertex) == FALSE)
+	{
+		return NULL;
+	}
+	
+	/* Start creating a linked list to store path */
+	head = create_new_node(dst_vertex);
+	
+	/* Keep adding the vertexes in path to iterator */
+	while(bfs_ds->edge_to[dst_vertex] != src_vertex)
+	{
+		temp = create_new_node(bfs_ds->edge_to[dst_vertex]);
+		temp->next = head;
+		head = temp;
+		
+		/* Get the parent vertex to current vertex */
+		dst_vertex = bfs_ds->edge_to[dst_vertex];
+	}
+	
+	/* Add the source vertex */
+	temp = create_new_node(src_vertex);
+	temp->next = head;
+	head = temp;
+	
+	return head;
+}
+
+/* BFS Sample data
+
+vertices = 6
+edges = 8
+0 5 
+2 4
+2 3
+1 2
+0 1
+3 4
+3 5
+0 2
+
+
+*/
+int edges_arr[8][2] = 
+{
+    {0,5}, {2,4}, {2,3}, {1,2}, {0,1}, {3,4}, {3,5}, {0,2}
+};
+
+int main()
+{
+	int i = 0, vertices = 0, edges = 0, adj_vertex = 0;
+	int v1 = 0, v2 = 0;
+	int src_vertex = 0; 
+	int dst_vertex = 3;
+	graph_t * graph_instance = NULL;
+	linked_list_t * path_iterator = NULL;
+	
+	// Get number of vertices and initialize the graph
+	printf("\nEnter the number of Vertices : ");
+	scanf("%d", &vertices);
+	graph_instance = init_graph(vertices);
+	
+	// Add graph edges
+	printf("\nEnter the number of Edge pairs : ");
+	scanf("%d", &edges);
+	if(graph_instance)
+	{
+		for(i = 0; i < edges; i++)
+		{
+		#if 0
+			printf("\nEdge Pair [%d] : ", i+1);
+			scanf("%d %d", &v1, &v2);
+			addEdge(graph_instance, v1, v2);
+		#else
+		    addEdge(graph_instance, edges_arr[i][0], edges_arr[i][1]);
+		#endif
+		}
+	}
+	
+#if 0
+	// Print adjacent list of vertex
+	printf("\nEnter the Vertex for which adjacent Vertex are required : ");
+	scanf("%d", &adj_vertex);
+    print_adjacent(graph_instance, adj_vertex);
+#endif 
+
+#if 0
+    // Print max degree of graph
+    printf("\n=======================================================");
+    printf("\nMax Degree of Graph : %d", max_degree(graph_instance) );
+    printf("\n=======================================================");
+#endif 
+
+#if 0
+    // Count number of self loops in graph
+    printf("\n=======================================================");
+    printf("\nSelf Loops in Graph : %d", number_of_self_loops(graph_instance) );
+    printf("\n=======================================================");
+#endif 
+
+#if 0	/* DFS */
+	printf("\n=======================================================");
+    dfs(graph_instance, src_vertex);
+	printf("\nPath to vertex(%d) till vertex (%d) : ", src_vertex , dst_vertex);
+	path_iterator = path_to(src_vertex, dst_vertex);
+	if(path_iterator)
+	{
+	    while(path_iterator != NULL)
+    	{
+    		printf("%d -> ", path_iterator->vertex_num);
+    		path_iterator = path_iterator->next;
+    	}
+	}
+	else
+	{
+	    printf(" No path.");
+	}
+    printf("\n=======================================================");
+#endif
+
+#if 1	/* BFS */
+	printf("\n=======================================================");
+    bfs(graph_instance, src_vertex);
+	printf("\nPath to vertex(%d) till vertex (%d) : ", src_vertex , dst_vertex);
+	path_iterator = bfs_path_to(src_vertex, dst_vertex);
+	if(path_iterator)
+	{
+	    while(path_iterator != NULL)
+    	{
+    		printf("%d -> ", path_iterator->vertex_num);
+    		path_iterator = path_iterator->next;
+    	}
+	}
+	else
+	{
+	    printf(" No path.");
+	}
+    printf("\n=======================================================");
+#endif
+
+	
+	getch();
+    return 0;
+}
+
