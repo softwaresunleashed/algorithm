@@ -1,0 +1,51 @@
+======================================================================================
+Network Protocols
+======================================================================================
+MPLS (Multi Protocol Label Switching) :
+		TEXT : 
+		https://www.rcrwireless.com/20140513/fundamentals/mpls-routing
+		
+		VIDEOS :
+		https://www.youtube.com/watch?v=E5Ud1m9h0yc
+		https://www.youtube.com/watch?v=U1w-b9GIt0k		[MPLS Part 1: The Basics of Label Switching]
+		https://www.youtube.com/watch?v=Hb48e3dPcvk		[MPLS Part 2: MPLS-TP]
+		
+		
+		
+SDN (Software Defined Network)
+		VIDEOS :
+		https://www.youtube.com/watch?v=TQVl5-G3u2U
+		
+
+NFV (Network Function Virtualization)
+		VIDEOS :
+		https://www.youtube.com/watch?v=Vl5UJUR1uV4
+		
+
+
+======================================================================================
+ARM Architecture
+======================================================================================
+ARMv7 Architecture
+		VIDEOS :
+		https://www.youtube.com/watch?v=7LqPJGnBPMM
+
+ARMv8	 Architecture
+		TEXT : 
+		https://dornerworks.com/blog/vatranslation		( MMU table walk through )
+		
+		VIDEOS : 
+		https://www.youtube.com/watch?v=Vm02ZMSfdOc	( ARMv8 Technology Preview Part 2 of 4 | AES | Banked Registers | Exception Model )
+		https://www.youtube.com/watch?v=9ppbRPgzO_s		( ARMv8 Technology Preview Part 3 of 4 | Exception Model Contd. | MMU |  Translation Page Table  | Memory | AARCH32 & AARCH64 relationships )
+		https://www.youtube.com/watch?v=YPGMwuDaN2k	( ARMv8 Technology Preview Part 4 of 4 | Debug | Product Road Map )
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

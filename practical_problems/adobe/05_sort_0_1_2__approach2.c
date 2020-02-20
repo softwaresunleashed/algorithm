@@ -39,6 +39,7 @@ void sort_array_012(int input_array[], int size)
 {
 	int i = 0, count_0 = 0, count_1 = 0, count_2 = 0;
 	
+	/* Traverse the input array to find out the number of 0, 1, 2's in array */
 	for(i = 0; i < size; i++)
 	{
 		switch(input_array[i])
