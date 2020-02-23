@@ -39,8 +39,30 @@ ARMv8	 Architecture
 		https://www.youtube.com/watch?v=9ppbRPgzO_s		( ARMv8 Technology Preview Part 3 of 4 | Exception Model Contd. | MMU |  Translation Page Table  | Memory | AARCH32 & AARCH64 relationships )
 		https://www.youtube.com/watch?v=YPGMwuDaN2k	( ARMv8 Technology Preview Part 4 of 4 | Debug | Product Road Map )
 		
+SMMU - System Memory Management Unit
+		VIDEOS : 
+		https://www.youtube.com/watch?v=qlH4-oHnBb8		( Virtual Memory: 3 What is Virtual Memory?  )
+		https://www.youtube.com/watch?v=59rEMnKWoS4	( Virtual Memory: 4 How Does Virtual Memory Work? )
+		https://www.youtube.com/watch?v=KNUJhZCQZ9c	( Virtual Memory: 5 Page Tables )
+		https://www.youtube.com/watch?v=ZjKS1IbiGDA		( Virtual Memory: 6 Address Translation )
+		https://www.youtube.com/watch?v=6neHHkI0Z0o		( Virtual Memory: 7 Address Translation Example Walkthrough )
+		https://www.youtube.com/watch?v=bShqyf-hDfg		( Virtual Memory: 8 Page Faults )
+		https://www.youtube.com/watch?v=uDzXXnNy544		( Virtual Memory: 9 Memory Protection )		
+		https://www.youtube.com/watch?v=uyrSn3qbZ8U		( Virtual Memory: 10 Making Virtual Memory Fast )
+		https://www.youtube.com/watch?v=95QpHJX55bM	( Virtual Memory: 11 TLB Example )
+		https://www.youtube.com/watch?v=Z4kSOv49GNc	( Virtual Memory: 12 Multi-level Page Tables )
+		https://www.youtube.com/watch?v=3sX5obQCHNA	( Virtual Memory: 13 TLBs and Caches )
+		
+GIC 
+		
+Interrupt Virtualization
+		VIDEOS : 
+		https://www.youtube.com/watch?v=BGGbgufgP_Y	( [2015] ARM interrupt virtualization by Andre Przywara )
 		
 		
+Virtualization
+		VIDEOS : 
+		https://www.youtube.com/watch?v=cuXyGkZRUKU	( [2017] Nested Virtualization on ARM by Christoffer Dall )
 		
 		
 		
