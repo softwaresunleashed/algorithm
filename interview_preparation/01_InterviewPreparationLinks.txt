@@ -53,19 +53,52 @@ SMMU - System Memory Management Unit
 		https://www.youtube.com/watch?v=Z4kSOv49GNc	( Virtual Memory: 12 Multi-level Page Tables )
 		https://www.youtube.com/watch?v=3sX5obQCHNA	( Virtual Memory: 13 TLBs and Caches )
 		
-GIC 
-		
+GIC / INTERRUPT HANDLING (ARM)
+		TEXT : 
+		https://developer.arm.com/docs/den0024/latest/aarch64-exception-handling/the-generic-interrupt-controller/interrupt-handling
+		VIDEOS :
+				
 Interrupt Virtualization
 		VIDEOS : 
-		https://www.youtube.com/watch?v=BGGbgufgP_Y	( [2015] ARM interrupt virtualization by Andre Przywara )
+		https://www.youtube.com/watch?v=BGGbgufgP_Y	( [2015] ARM interrupt virtualization by Andre Przywara | GICv2 | GICv2 Virtualization Suport |  )
+
 		
-		
+ARM Virtualization Extensions
+		VIDEOS : 
+		https://www.youtube.com/watch?v=uvh6Mu3j1oY		( XPDS15 - ARM: Virtualization Extensions | ARM Interrupts & Virtualization | Hypervisor Architecture | Interrupts | Timers | IOMMU | SMMU |  )
+
+
+
 Virtualization
 		VIDEOS : 
 		https://www.youtube.com/watch?v=cuXyGkZRUKU	( [2017] Nested Virtualization on ARM by Christoffer Dall )
+			
+
+
+======================================================================================
+XOR Linked List
+======================================================================================
+		TEXT :
+		https://www.geeksforgeeks.org/xor-linked-list-a-memory-efficient-doubly-linked-list-set-1/
 		
+
+======================================================================================
+CACHE Coherency
+======================================================================================	
+		VIDEOS : 
+		https://www.youtube.com/watch?v=BNH-3TwmVN0			( 4 2 1 Cache Coherence )
+		https://www.youtube.com/watch?v=_J5xngIULes				( 4 2 2 Classes of Cache Coherence Protocols | Snooping Protocol (Write Invalidate / Write Update) | Directory Based Protocol )
+		https://www.youtube.com/watch?v=ctLdDiCDF28				( 4 2 3 MSI Write Invalidate Protocol )
 		
+======================================================================================
+Threaded vs Non-Threaded IRQs
+======================================================================================	
+		TEXT : 
+		https://mindlinux.wordpress.com/2016/10/11/irqs-the-hard-the-soft-the-threaded-and-the-preemptible-alison-chaiken 		( IRQs: the Hard, the Soft, the Threaded and the Preemptible – Alison Chaiken )
+		https://lwn.net/Articles/302043/											( Moving interrupts to threads - LWN.net )
 		
+		VIDEOS : 
+		https://www.youtube.com/watch?v=-pehAzaP1eg				( IRQs: the Hard, the Soft, the Threaded and the Preemptible )
 		
 		
 		
