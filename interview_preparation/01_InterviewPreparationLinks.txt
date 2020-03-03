@@ -100,6 +100,16 @@ Threaded vs Non-Threaded IRQs
 		VIDEOS : 
 		https://www.youtube.com/watch?v=-pehAzaP1eg				( IRQs: the Hard, the Soft, the Threaded and the Preemptible )
 		
+======================================================================================		
+Message Passing in Linux
+======================================================================================
+		TEXT : 
+		https://www.geeksforgeeks.org/ipc-using-message-queues/			( IPC using Message Queues )
+
+
+
+		VIDEOS : 
+
 		
 		
 		
