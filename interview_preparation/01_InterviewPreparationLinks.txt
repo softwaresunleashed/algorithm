@@ -104,8 +104,9 @@ Threaded vs Non-Threaded IRQs
 Message Passing in Linux
 ======================================================================================
 		TEXT : 
-		https://www.geeksforgeeks.org/ipc-using-message-queues/			( IPC using Message Queues )
-
+		https://opensource.com/article/19/4/interprocess-communication-linux-storage			( Part 1 : Inter-process communication in Linux: Shared storage, Shared Memory)
+		https://opensource.com/article/19/4/interprocess-communication-linux-channels		( Part 2 : Inter-process communication in Linux: Using pipes and message queues)
+		https://www.geeksforgeeks.org/ipc-using-message-queues/										( IPC using Message Queues )
 
 		VIDEOS : 
 		https://www.youtube.com/watch?v=G2vwkBZy894
@@ -114,10 +115,15 @@ Message Passing in Linux
 Fork
 ======================================================================================
 	TEXT : 
-	https://www.geeksforgeeks.org/fork-system-call/								( fork() in C )
+	https://www.geeksforgeeks.org/fork-system-call/															( fork() in C )
+	https://www.geeksforgeeks.org/zombie-and-orphan-processes-in-c/								( Zombie and Orphan Processes in C)
+	https://www.geeksforgeeks.org/fork-memory-shared-bw-processes-created-using/		( fork() and memory shared b/w processes created using it )
 	
-	
-	
+
+======================================================================================
+Interview Questions Link
+======================================================================================
+https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/			( Find Merging point of two linked lists )
 		
 
 		
