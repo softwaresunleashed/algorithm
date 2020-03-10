@@ -67,8 +67,6 @@ ARM Virtualization Extensions
 		VIDEOS : 
 		https://www.youtube.com/watch?v=uvh6Mu3j1oY		( XPDS15 - ARM: Virtualization Extensions | ARM Interrupts & Virtualization | Hypervisor Architecture | Interrupts | Timers | IOMMU | SMMU |  )
 
-
-
 Virtualization
 		VIDEOS : 
 		https://www.youtube.com/watch?v=cuXyGkZRUKU	( [2017] Nested Virtualization on ARM by Christoffer Dall )
