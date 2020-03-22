@@ -124,7 +124,15 @@ Interview Questions Link
 https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/			( Find Merging point of two linked lists )
 		
 
+======================================================================================
+Huge TLBs (Linux)
+======================================================================================
+https://www.kernel.org/doc/html/latest/admin-guide/mm/hugetlbpage.html					()
 		
 		
-		
+======================================================================================
+Series on Linux Device Driver - Embetronicx
+======================================================================================
+https://embetronicx.com/tutorials/linux/device-drivers/ioctl-tutorial-in-linux/											( Part 8 – I/O Control in Linux IOCTL() )
+https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/						( Part 30 - Atomic variable in Linux Device Driver  )
 		
