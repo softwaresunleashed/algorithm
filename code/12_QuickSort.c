@@ -50,7 +50,7 @@ void print_arr(char * message, int * arr, int arr_size)
     
     for(i = 0; i < arr_size; i++)
 	{
-		printf("%d  ", i);
+		printf("%d  ", arr[i]);
 	}	
 }
 
@@ -74,7 +74,7 @@ int main()
 	
 	print_arr("Array before MergeSort :", arr, num_elem);
 	
-	mergesort(arr, num_elem);
+	quicksort(arr, num_elem);
 	
 	print_arr("Array after MergeSort :", arr, num_elem);
 	
