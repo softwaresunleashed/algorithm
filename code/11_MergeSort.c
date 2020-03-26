@@ -36,7 +36,7 @@ void print_arr(char * message, int * arr, int arr_size)
     
     for(i = 0; i < arr_size; i++)
 	{
-		printf("%d  ", arr[i]);
+		printf("%d  ", i);
 	}	
 }
 
