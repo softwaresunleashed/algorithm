@@ -5,8 +5,8 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/device.h>
-#include <linux/slab.h>                 //kmalloc()
-#include <linux/uaccess.h>              //copy_to/from_user()
+#include<linux/slab.h>                 //kmalloc()
+#include<linux/uaccess.h>              //copy_to/from_user()
 #include <linux/ioctl.h>
 #include <linux/interrupt.h>
 #include <asm/io.h>
@@ -16,9 +16,9 @@ extern int send_sig_info(int sig, struct siginfo *info, struct task_struct *p);
 #define SIGETX 44
  
 #define REG_CURRENT_TASK _IOW('a','a',int32_t*)
- 
+
 #define IRQ_NO 11
- 
+
 /* Signaling to Application */
 static struct task_struct *task = NULL;
 static int signum = 0;
@@ -46,7 +46,7 @@ static struct file_operations fops =
         .unlocked_ioctl = etx_ioctl,
         .release        = etx_release,
 };
- 
+
 //Interrupt handler for IRQ 11. 
 static irqreturn_t irq_handler(int irq,void *dev_id) {
     struct siginfo info;
@@ -57,14 +57,14 @@ static irqreturn_t irq_handler(int irq,void *dev_id) {
     info.si_signo = SIGETX;
     info.si_code = SI_QUEUE;
     info.si_int = 1;
- 
+
     if (task != NULL) {
         printk(KERN_INFO "Sending signal to app\n");
         if(send_sig_info(SIGETX, &info, task) < 0) {
             printk(KERN_INFO "Unable to send signal\n");
         }
     }
- 
+
     return IRQ_HANDLED;
 }
  
@@ -89,11 +89,9 @@ static int etx_release(struct inode *inode, struct file *file)
 static ssize_t etx_read(struct file *filp, char __user *buf, size_t len, loff_t *off)
 {
     printk(KERN_INFO "Read Function\n");
-    asm("nop");  //Triggering Interrupt. Corresponding to irq 11
-    //asm("int $0x3B");  //Triggering Interrupt. Corresponding to irq 11
+    asm("int $0x3B");  //Triggering Interrupt. Corresponding to irq 11
     return 0;
 }
-
 static ssize_t etx_write(struct file *filp, const char __user *buf, size_t len, loff_t *off)
 {
     printk(KERN_INFO "Write function\n");
@@ -110,10 +108,9 @@ static long etx_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
     return 0;
 }
  
+ 
 static int __init etx_driver_init(void)
 {
-	int request_irq_ret = 0xDEAD;
-
     /*Allocating Major number*/
     if((alloc_chrdev_region(&dev, 0, 1, "etx_Dev")) <0){
             printk(KERN_INFO "Cannot allocate major number\n");
@@ -141,15 +138,14 @@ static int __init etx_driver_init(void)
         printk(KERN_INFO "Cannot create the Device 1\n");
         goto r_device;
     }
- 
-    if (request_irq_ret = request_irq(IRQ_NO, irq_handler, IRQF_SHARED, "etx_device", (void *)(irq_handler))) {
-        printk(KERN_INFO "my_device: cannot register IRQ, request_irq_ret = %d ", request_irq_ret);
+
+    if (request_irq(IRQ_NO, irq_handler, IRQF_SHARED, "etx_device", (void *)(irq_handler))) {
+        printk(KERN_INFO "my_device: cannot register IRQ ");
         goto irq;
     }
- 
+
     printk(KERN_INFO "Device Driver Insert...Done!!!\n");
     return 0;
-
 irq:
     free_irq(IRQ_NO,(void *)(irq_handler));
 r_device:
@@ -176,17 +172,4 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("EmbeTronicX <embetronicx@gmail.com>");
 MODULE_DESCRIPTION("A simple device driver - Signals");
 MODULE_VERSION("1.20");
-
-
-
-
-
-
-
-
-
-
-
-
-
 
