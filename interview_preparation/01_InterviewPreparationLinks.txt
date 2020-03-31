@@ -141,6 +141,7 @@ https://embetronicx.com/tutorials/linux/device-drivers/device-file-creation-for-
 https://embetronicx.com/tutorials/linux/device-drivers/device-file-creation-for-character-drivers/														( Part 6 – Cdev structure and File Operations )
 https://embetronicx.com/tutorials/linux/device-drivers/linux-device-driver-tutorial-programming/														( Part 7 – Linux Device Driver Programming )
 https://embetronicx.com/tutorials/linux/device-drivers/ioctl-tutorial-in-linux/																						( Part 8 – I/O Control in Linux IOCTL() )
+https://embetronicx.com/tutorials/linux/device-drivers/procfs-in-linux/																								( Part 9 – Procfs in Linux )
 https://embetronicx.com/tutorials/linux/device-drivers/sending-signal-from-linux-device-driver-to-user-space/									(Part 25 – Sending Signal from Linux Device Driver to User Space)
 https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/																	( Part 30 - Atomic variable in Linux Device Driver  )
 
