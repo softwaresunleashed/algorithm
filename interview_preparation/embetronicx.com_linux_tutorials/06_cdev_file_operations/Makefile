@@ -1,4 +1,4 @@
-obj-m += dynamic_allocated_char_driver.o
+obj-m += dummy_driver.o
 
 KDIR = /lib/modules/$(shell uname -r)/build
 
