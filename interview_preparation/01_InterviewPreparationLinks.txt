@@ -143,6 +143,8 @@ https://embetronicx.com/tutorials/linux/device-drivers/linux-device-driver-tutor
 https://embetronicx.com/tutorials/linux/device-drivers/ioctl-tutorial-in-linux/																						( Part 8 – I/O Control in Linux IOCTL() )
 https://embetronicx.com/tutorials/linux/device-drivers/procfs-in-linux/																								( Part 9 – Procfs in Linux )
 https://embetronicx.com/tutorials/linux/device-drivers/waitqueue-in-linux-device-driver-tutorial/														( Part 10 – WaitQueue in Linux )
+https://embetronicx.com/tutorials/linux/device-drivers/sysfs-in-linux-kernel/																						( Part 11 – Sysfs in Linux Kernel )
+
 https://embetronicx.com/tutorials/linux/device-drivers/sending-signal-from-linux-device-driver-to-user-space/									(Part 25 – Sending Signal from Linux Device Driver to User Space)
 https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/																	( Part 30 - Atomic variable in Linux Device Driver  )
 
