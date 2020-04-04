@@ -12,6 +12,8 @@
 #include <linux/interrupt.h>
 #include <asm/io.h>
 
+#include <asm/hw_irq.h>                 // Added to work around IRQ handler error on latest kernel
+
 #define IRQ_NO 11
 
 //Interrupt handler for IRQ 11. 
@@ -88,8 +90,17 @@ static int etx_release(struct inode *inode, struct file *file)
 static ssize_t etx_read(struct file *filp, 
                 char __user *buf, size_t len, loff_t *off)
 {
+        struct irq_desc *desc;
+
         printk(KERN_INFO "Read function\n");
-        asm("int $0x3B");  // Corresponding to irq 11
+        desc = irq_to_desc(11);
+
+        if (!desc) 
+            return -EINVAL;
+
+        __this_cpu_write(vector_irq[59], desc);
+
+        asm("int $0x3B");  // Corresponding to irq 11 (on Intel based cores)
         return 0;
 }
 static ssize_t etx_write(struct file *filp, 
