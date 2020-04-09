@@ -153,6 +153,7 @@ https://embetronicx.com/tutorials/linux/device-drivers/linux-device-driver-tutor
 https://embetronicx.com/tutorials/linux/device-drivers/example-linked-list-in-linux-kernel/																	( Part 18 – Example Linked List in Linux Kernel )
 https://embetronicx.com/tutorials/linux/device-drivers/linux-device-drivers-tutorial-kernel-thread/														( Part 19 – Kernel Thread )
 https://embetronicx.com/tutorials/linux/device-drivers/tasklet-static-method/																						( Part 20 – Tasklet | Static Method )
+https://embetronicx.com/tutorials/linux/device-drivers/tasklets-dynamic-method/																				( Part 21 – Tasklet | Dynamic Method )			
 https://embetronicx.com/tutorials/linux/device-drivers/sending-signal-from-linux-device-driver-to-user-space/									(Part 25 – Sending Signal from Linux Device Driver to User Space)
 https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/																	( Part 30 - Atomic variable in Linux Device Driver  )
 
