@@ -158,6 +158,7 @@ https://embetronicx.com/tutorials/linux/device-drivers/linux-device-driver-tutor
 https://embetronicx.com/tutorials/linux/device-drivers/spinlock-in-linux-kernel-1/																				( Part 23 – Spinlock in Linux Kernel Part 1 )
 https://embetronicx.com/tutorials/linux/device-drivers/read-write-spinlock/																							( Part 24 – Read Write Spinlock in Linux Kernel (Part 2) )
 https://embetronicx.com/tutorials/linux/device-drivers/sending-signal-from-linux-device-driver-to-user-space/									(Part 25 – Sending Signal from Linux Device Driver to User Space)
+https://embetronicx.com/tutorials/linux/device-drivers/using-kernel-timer-in-linux-device-driver/														( Part 26 – Using Kernel Timer In Linux Device Driver )
 https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/																	( Part 30 - Atomic variable in Linux Device Driver  )
 
 
