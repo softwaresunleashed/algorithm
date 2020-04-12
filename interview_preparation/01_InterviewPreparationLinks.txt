@@ -160,6 +160,8 @@ https://embetronicx.com/tutorials/linux/device-drivers/read-write-spinlock/					
 https://embetronicx.com/tutorials/linux/device-drivers/sending-signal-from-linux-device-driver-to-user-space/									(Part 25 – Sending Signal from Linux Device Driver to User Space)
 https://embetronicx.com/tutorials/linux/device-drivers/using-kernel-timer-in-linux-device-driver/														( Part 26 – Using Kernel Timer In Linux Device Driver )
 https://embetronicx.com/tutorials/linux/device-drivers/using-high-resolution-timer-in-linux-device-driver/											( Part 27 – Using High Resolution Timer In Linux Device Driver )
+https://embetronicx.com/tutorials/linux/device-drivers/completion-in-linux/																							( Part 28 – Thread Completion in Linux Device Driver )
+https://embetronicx.com/tutorials/linux/device-drivers/export_symbol-in-linux-device-driver/																( Part 29 – EXPORT_SYMBOL in Linux Device Driver )
 https://embetronicx.com/tutorials/linux/device-drivers/atomic-variables-atomic-operation/																	( Part 30 - Atomic variable in Linux Device Driver  )
 
 
